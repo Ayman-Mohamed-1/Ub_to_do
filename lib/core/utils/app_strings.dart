@@ -6,13 +6,13 @@ class AppStrings {
   static const String getStarted = 'Get Started';
   static const String onBoardingTitleOne = 'Manage your tasks';
   static const String onBoardingSubTitleOne =
-      'You can easily manage all of your daily tasks in DoMe for free';
+      'You can easily manage all of your daily\n tasks in DoMe for free';
   static const String onBoardingTitleTwo = 'Create daily routine';
   static const String onBoardingSubTitleTwo =
-      'In Uptodo  you can create your personalized routine to stay productive';
+      'In Uptodo  you can create your\n personalized routine to stay productive';
   static const String onBoardingTitleThree = 'Organize your tasks';
   static const String onBoardingSubTitleThree =
-      'You can organize your daily tasks by adding your tasks into separate categories';
+      'You can organize your daily tasks by\n adding your tasks into separate categories';
   static const String today = 'Today';
   static const String noTaskTitle = 'What do you want to do today?';
   static const String noTaskSubTitle = 'Tap + to add your tasks';

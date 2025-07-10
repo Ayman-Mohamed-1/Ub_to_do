@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:up_to_do/core/theme/theme.dart';
 import 'package:up_to_do/features/auth/presentation/screens/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,6 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: DarkTheme(),
+      themeMode: ThemeMode.dark,
+      // فى مشكله فى  dark mode
+      // darkTheme: getAppTheme(),
       title: "To-Do app",
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
