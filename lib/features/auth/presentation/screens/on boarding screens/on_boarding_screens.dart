@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:up_to_do/core/services/services_locator.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
 import 'package:up_to_do/core/utils/app_strings.dart';
 import 'package:up_to_do/core/widget/custom_button.dart';
@@ -8,8 +9,10 @@ import 'package:up_to_do/core/widget/custom_text_button.dart';
 import 'package:up_to_do/features/auth/data/model/on_bordingModel.dart';
 import 'package:up_to_do/features/task/task.dart';
 
+import '../../../../../core/database/cache/cache_helper.dart';
+
 class OnBoardingScreens extends StatefulWidget {
-  OnBoardingScreens({super.key});
+  const OnBoardingScreens({super.key});
 
   @override
   State<OnBoardingScreens> createState() => OoBboardinSscreensState();
@@ -107,13 +110,24 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
                             )
                           : customButton(
                               text: AppStrings.getStarted,
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Task(),
-                                  ),
-                                );
+                              onPressed: () async {
+                                await sl<CacheHelper>()
+                                    .saveData(
+                                      key: AppStrings.onBoardingKey,
+                                      value: true,
+                                    )
+                                    .then((value) {
+                                      print("is visited");
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Task(),
+                                        ),
+                                      );
+                                    })
+                                    .catchError((e) {
+                                      print(e);
+                                    });
                               },
                             ),
                     ],
