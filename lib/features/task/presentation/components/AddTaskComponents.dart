@@ -1,8 +1,10 @@
+// ignore: duplicate_ignore
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:up_to_do/core/utils/app_colors.dart';
 
 class AddTaskComponents extends StatelessWidget {
   const AddTaskComponents({
