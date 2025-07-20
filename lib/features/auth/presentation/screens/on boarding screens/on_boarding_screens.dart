@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:up_to_do/core/services/services_locator.dart';
@@ -7,8 +8,7 @@ import 'package:up_to_do/core/utils/app_strings.dart';
 import 'package:up_to_do/core/widget/custom_button.dart';
 import 'package:up_to_do/core/widget/custom_text_button.dart';
 import 'package:up_to_do/features/auth/data/model/on_bordingModel.dart';
-import 'package:up_to_do/features/task/task.dart';
-
+import 'package:up_to_do/features/task/presentation/screens/home/home_screen.dart';
 import '../../../../../core/database/cache/cache_helper.dart';
 
 class OnBoardingScreens extends StatefulWidget {
@@ -25,7 +25,7 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24),
           child: PageView.builder(
             controller: controller,
             itemCount: OnBoardingModel.onBoardingScreens.length,
@@ -44,12 +44,12 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
                               controller.jumpToPage(2);
                             },
                           )
-                        : Container(height: 50),
+                        : Container(height: 50.h),
                   ),
-                  Gap(15),
+                  Gap(15.h),
                   // image
                   Image.asset(OnBoardingModel.onBoardingScreens[index].imgPath),
-                  Gap(15),
+                  Gap(15.h),
                   SmoothPageIndicator(
                     controller: controller, // PageController
                     count: 3,
@@ -65,19 +65,19 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
                     ), // your preferred effect
                     onDotClicked: (index) {},
                   ),
-                  Gap(84),
+                  Gap(84.h),
 
                   // title
                   Text(
                     OnBoardingModel.onBoardingScreens[index].title,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
-                  Gap(40),
+                  Gap(40.h),
                   // suptitle
                   Text(
                     textAlign: TextAlign.center,
                     OnBoardingModel.onBoardingScreens[index].subTitle,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
                       color: AppColors.white.withOpacity(.8),
                     ),
                   ),
@@ -121,7 +121,7 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Task(),
+                                          builder: (context) => HomeScreen(),
                                         ),
                                       );
                                     })
