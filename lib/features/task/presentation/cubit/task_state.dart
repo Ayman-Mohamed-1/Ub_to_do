@@ -32,3 +32,11 @@ final class EndTimeErrorState extends TaskState {}
 final class ChangeCheckMarkIndexState extends TaskState {}
 
 //*  ChangeCheckMarkIndex time
+//! Start time
+final class InsertTaskLoadingState extends TaskState {}
+
+final class InsertTaskSucessState extends TaskState {}
+
+final class InsertTaskErrorState extends TaskState {}
+
+//* Start time

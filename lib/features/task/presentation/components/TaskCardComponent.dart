@@ -6,10 +6,20 @@ import 'package:gap/gap.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
 import 'package:up_to_do/core/utils/app_strings.dart';
 import 'package:up_to_do/core/widget/custom_button.dart';
+import 'package:up_to_do/features/task/data/model/taskModel.dart';
 
 class TaskCardComponent extends StatelessWidget {
-  const TaskCardComponent({super.key});
-
+  TaskCardComponent({super.key, required this.taskModel});
+  List<Color> arrColors = [
+    AppColors.red,
+    AppColors.green,
+    AppColors.blueGrey,
+    AppColors.blue,
+    AppColors.orange,
+    AppColors.purple,
+    AppColors.grey,
+  ];
+  final TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,7 +78,7 @@ class TaskCardComponent extends StatelessWidget {
             width: 427.w,
             height: 120.h,
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: arrColors[taskModel.color],
               border: Border.all(width: 1.w, style: BorderStyle.solid),
               borderRadius: BorderRadius.circular(16.r),
             ),
@@ -82,7 +92,7 @@ class TaskCardComponent extends StatelessWidget {
                   children: [
                     // text
                     Text(
-                      "task",
+                      taskModel.title,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
 
@@ -92,7 +102,7 @@ class TaskCardComponent extends StatelessWidget {
                         Icon(Icons.timer_outlined, color: AppColors.white),
                         Gap(3.w),
                         Text(
-                          "09:33 PM - 09:48 PM",
+                          "${taskModel.startTime} - ${taskModel.endTime}",
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
@@ -100,7 +110,7 @@ class TaskCardComponent extends StatelessWidget {
 
                     // task text
                     Text(
-                      "Learn SQFLITE ",
+                      taskModel.task,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                   ],
@@ -118,8 +128,12 @@ class TaskCardComponent extends StatelessWidget {
                 RotatedBox(
                   quarterTurns: 3,
                   child: Text(
-                    AppStrings.toDo,
-                    style: Theme.of(context).textTheme.displaySmall,
+                    taskModel.isComplete == true
+                        ? AppStrings.completed
+                        : AppStrings.toDo,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.displaySmall!.copyWith(fontSize: 14),
                   ),
                 ),
               ],

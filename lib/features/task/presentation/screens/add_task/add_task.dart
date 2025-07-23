@@ -12,8 +12,6 @@ import 'package:up_to_do/features/task/presentation/cubit/task_cubit.dart';
 class AddTask extends StatelessWidget {
   AddTask({super.key});
 
-  TextEditingController title = TextEditingController();
-  TextEditingController note = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +33,8 @@ class AddTask extends StatelessWidget {
       body: BlocBuilder<TaskCubit, TaskState>(
         builder: (context, state) {
           return Form(
+            
+            key: BlocProvider.of<TaskCubit>(context).formkwy,
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsetsGeometry.all(24),
@@ -44,7 +44,9 @@ class AddTask extends StatelessWidget {
                   children: [
                     Gap(30.h),
                     AddTaskComponents(
-                      controller: title,
+                      controller: BlocProvider.of<TaskCubit>(
+                        context,
+                      ).titleController,
                       tilte: AppStrings.tilte,
                       hintText: AppStrings.tilteHint,
                       validator: (val) {
@@ -56,7 +58,9 @@ class AddTask extends StatelessWidget {
                       },
                     ),
                     AddTaskComponents(
-                      controller: note,
+                      controller: BlocProvider.of<TaskCubit>(
+                        context,
+                      ).noteController,
                       tilte: AppStrings.note,
                       hintText: AppStrings.notehint,
                       validator: (val) {
@@ -177,7 +181,9 @@ class AddTask extends StatelessWidget {
                       height: 50.h,
                       child: customButton(
                         text: AppStrings.createTask,
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<TaskCubit>(context).insertData();
+                        },
                       ),
                     ),
                   ],

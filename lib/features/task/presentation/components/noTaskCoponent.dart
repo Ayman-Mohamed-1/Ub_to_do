@@ -12,14 +12,17 @@ class NoTaskCoponent extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Container(
-            width: 227.w,
+          SizedBox(
+            width: 250.w,
             child: Image.asset(AppAssets.noTasks, fit: BoxFit.cover),
           ),
-          Gap(30.h),
+          Gap(15.h),
           Text(
+            textAlign: TextAlign.center,
             AppStrings.noTaskTitle,
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.displayMedium!.copyWith(fontSize: 20),
           ),
           Gap(10.h),
           Text(

@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
+import 'package:up_to_do/features/task/data/model/taskModel.dart';
 part 'task_state.dart';
 
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(TaskInitial());
+
+  GlobalKey<FormState> formkwy = GlobalKey<FormState>();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController noteController = TextEditingController();
   DateTime currentData = DateTime.now();
   String startTime = DateFormat("hh:mm a").format(DateTime.now());
   String endTime = DateFormat(
@@ -84,7 +89,29 @@ class TaskCubit extends Cubit<TaskState> {
     currentIndex = index;
     emit(ChangeCheckMarkIndexState());
   }
+
   //*  ChangeCheckMarkIndex time
+  List<TaskModel> tasksList = [];
+  void insertData() {
+    emit(InsertTaskLoadingState());
+    try {
+      tasksList.add(
+        TaskModel(
+          id: 1,
+          title: titleController.text,
+          task: noteController.text,
+          endTime: endTime,
+          startTime: startTime,
+          color: currentIndex,
+          isComplete: true,
+        ),
+      );
+      print(tasksList);
+      emit(InsertTaskSucessState());
+    } catch (e) {
+      emit(InsertTaskErrorState());
+    }
+  }
 
   //? end Cubit
 }
