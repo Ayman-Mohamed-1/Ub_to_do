@@ -8,7 +8,7 @@ part 'task_state.dart';
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(TaskInitial());
 
-  GlobalKey<FormState> formkwy = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   DateTime currentData = DateTime.now();
@@ -106,6 +106,8 @@ class TaskCubit extends Cubit<TaskState> {
           isComplete: true,
         ),
       );
+      noteController.clear();
+      titleController.clear();
       print(tasksList);
       emit(InsertTaskSucessState());
     } catch (e) {

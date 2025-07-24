@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:up_to_do/core/commons/commons.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
 import 'package:up_to_do/core/utils/app_strings.dart';
 import 'package:up_to_do/core/widget/custom_button.dart';
@@ -30,11 +31,20 @@ class AddTask extends StatelessWidget {
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
-      body: BlocBuilder<TaskCubit, TaskState>(
+      body: BlocConsumer<TaskCubit, TaskState>(
+        listener: (context, state) {
+          if (state is InsertTaskSucessState) {
+            showToast(msg: "Added Sucessfully", state: ToastStates.succcess);
+            navegatPop(context: context);
+          }
+          if (state is InsertTaskErrorState) {
+            showToast(msg: "error", state: ToastStates.error);
+          }
+        },
+
         builder: (context, state) {
           return Form(
-            
-            key: BlocProvider.of<TaskCubit>(context).formkwy,
+            key: BlocProvider.of<TaskCubit>(context).formkey,
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsetsGeometry.all(24),
@@ -182,7 +192,11 @@ class AddTask extends StatelessWidget {
                       child: customButton(
                         text: AppStrings.createTask,
                         onPressed: () {
-                          BlocProvider.of<TaskCubit>(context).insertData();
+                          if (BlocProvider.of<TaskCubit>(
+                            context,
+                          ).formkey.currentState!.validate()) {
+                            BlocProvider.of<TaskCubit>(context).insertData();
+                          }
                         },
                       ),
                     ),

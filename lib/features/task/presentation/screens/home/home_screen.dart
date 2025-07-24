@@ -28,65 +28,62 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: BlocBuilder<TaskCubit, TaskState>(
           builder: (context, state) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsetsGeometry.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      DateFormat.yMMMMd().format(DateTime.now()),
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    Gap(12.h),
-                    Text(
-                      AppStrings.today,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    Gap(12.h),
-                    DatePicker(
-                      DateTime.now(),
-                      width: 60.w,
-                      height: 100.h,
-                      initialSelectedDate: DateTime.now(),
-                      selectionColor: AppColors.primary,
-                      selectedTextColor: AppColors.white,
-                      dateTextStyle: Theme.of(context).textTheme.displaySmall!
-                          .copyWith(
-                            fontSize: 20.sp,
-                            color: AppColors.white.withOpacity(.8),
+            return Padding(
+              padding: EdgeInsetsGeometry.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  Gap(12.h),
+                  Text(
+                    AppStrings.today,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  Gap(12.h),
+                  DatePicker(
+                    DateTime.now(),
+                    width: 60.w,
+                    height: 100.h,
+                    initialSelectedDate: DateTime.now(),
+                    selectionColor: AppColors.primary,
+                    selectedTextColor: AppColors.white,
+                    dateTextStyle: Theme.of(context).textTheme.displaySmall!
+                        .copyWith(
+                          fontSize: 20.sp,
+                          color: AppColors.white.withOpacity(.8),
+                        ),
+                    dayTextStyle: Theme.of(context).textTheme.displaySmall!
+                        .copyWith(color: AppColors.white.withOpacity(.8)),
+                    monthTextStyle: Theme.of(context).textTheme.displaySmall!
+                        .copyWith(color: AppColors.white.withOpacity(.8)),
+                    onDateChange: (date) {
+                      // New date selected
+                      setState(() {
+                        // _selectedValue = date;
+                      });
+                    },
+                  ),
+                  Gap(11.h),
+                  BlocProvider.of<TaskCubit>(context).tasksList.isEmpty
+                      ? NoTaskCoponent()
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: BlocProvider.of<TaskCubit>(
+                              context,
+                            ).tasksList.length,
+                            itemBuilder: (context, index) {
+                              return TaskCardComponent(
+                                taskModel: BlocProvider.of<TaskCubit>(
+                                  context,
+                                ).tasksList[index],
+                              );
+                            },
                           ),
-                      dayTextStyle: Theme.of(context).textTheme.displaySmall!
-                          .copyWith(color: AppColors.white.withOpacity(.8)),
-                      monthTextStyle: Theme.of(context).textTheme.displaySmall!
-                          .copyWith(color: AppColors.white.withOpacity(.8)),
-                      onDateChange: (date) {
-                        // New date selected
-                        setState(() {
-                          // _selectedValue = date;
-                        });
-                      },
-                    ),
-                    Gap(11.h),
-                    BlocProvider.of<TaskCubit>(context).tasksList.isEmpty
-                        ? NoTaskCoponent()
-                        : Column(
-                            children: List.generate(
-                              BlocProvider.of<TaskCubit>(
-                                context,
-                              ).tasksList.length,
-                              (index) {
-
-                                return TaskCardComponent(
-                                  taskModel: BlocProvider.of<TaskCubit>(
-                                    context,
-                                  ).tasksList[index],
-                                );
-                              },
-                            ),
-                          ),
-                  ],
-                ),
+                        ),
+                ],
               ),
             );
           },
