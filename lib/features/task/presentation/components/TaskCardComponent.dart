@@ -15,13 +15,20 @@ import 'package:up_to_do/features/task/presentation/cubit/task_cubit.dart';
 
 @immutable
 // ignore: must_be_immutable
-class TaskCardComponent extends StatelessWidget {
-
+class TaskCardComponent extends StatefulWidget {
   TaskCardComponent({
     super.key,
     required this.taskModel,
     required this.indexCompleted,
   });
+  final indexCompleted;
+  final TaskModel taskModel;
+
+  @override
+  State<TaskCardComponent> createState() => _TaskCardComponentState();
+}
+
+class _TaskCardComponentState extends State<TaskCardComponent> {
   List<Color> arrColors = [
     AppColors.red,
     AppColors.green,
@@ -31,8 +38,7 @@ class TaskCardComponent extends StatelessWidget {
     AppColors.purple,
     AppColors.grey,
   ];
-  final indexCompleted;
-  final TaskModel taskModel;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskCubit, TaskState>(
@@ -53,8 +59,9 @@ class TaskCardComponent extends StatelessWidget {
                       height: 200.h,
                       child: Column(
                         children: [
-                          taskModel.isComplete == true ||
-                                  taskModel.isComplete == 1
+                          // ?isComplete
+                          widget.taskModel.isComplete == true ||
+                                  widget.taskModel.isComplete == 1
                               ? Container()
                               : SizedBox(
                                   width: double.infinity,
@@ -67,7 +74,7 @@ class TaskCardComponent extends StatelessWidget {
                                       ).updataTask(
                                         BlocProvider.of<TaskCubit>(
                                           context,
-                                        ).tasksList[indexCompleted].id,
+                                        ).tasksList[widget.indexCompleted].id,
                                       );
                                       print(
                                         sl<SqfliteHelper>().getFromDB().then(
@@ -79,6 +86,7 @@ class TaskCardComponent extends StatelessWidget {
                                   ),
                                 ),
                           Gap(25.h),
+                          // ?deleteTask
                           SizedBox(
                             width: double.infinity,
                             height: 40.h,
@@ -88,12 +96,13 @@ class TaskCardComponent extends StatelessWidget {
                               onPressed: () {
                                 BlocProvider.of<TaskCubit>(
                                   context,
-                                ).deleteTask(taskModel.id);
+                                ).deleteTask(widget.taskModel.id);
                                 navegatPop(context: context);
                               },
                             ),
                           ),
                           Gap(25.h),
+                          // ?cancel
                           SizedBox(
                             width: double.infinity,
                             height: 40.h,
@@ -121,8 +130,7 @@ class TaskCardComponent extends StatelessWidget {
                 width: 427.w,
                 height: 120.h,
                 decoration: BoxDecoration(
-                  color: arrColors[taskModel.color],
-                  border: Border.all(width: 1.w, style: BorderStyle.solid),
+                  color: arrColors[widget.taskModel.color],
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Row(
@@ -135,25 +143,28 @@ class TaskCardComponent extends StatelessWidget {
                       children: [
                         // text
                         Text(
-                          taskModel.title,
+                          widget.taskModel.title,
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
 
                         // time
                         Row(
                           children: [
-                            Icon(Icons.timer_outlined, color: AppColors.white),
+                            Icon(
+                              Icons.timer_outlined,
+                              color: Theme.of(context).iconTheme.color,
+                            ),
                             Gap(3.w),
                             Text(
-                              "${taskModel.startTime} - ${taskModel.endTime}",
-                              style: Theme.of(context).textTheme.displaySmall,
+                              "${widget.taskModel.startTime} - ${widget.taskModel.endTime}",
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ],
                         ),
 
                         // task text
                         Text(
-                          taskModel.task,
+                          widget.taskModel.task,
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ],
@@ -171,13 +182,13 @@ class TaskCardComponent extends StatelessWidget {
                     RotatedBox(
                       quarterTurns: 3,
                       child: Text(
-                        taskModel.isComplete == 0 ||
-                                taskModel.isComplete == false
+                        widget.taskModel.isComplete == 0 ||
+                                widget.taskModel.isComplete == false
                             ? AppStrings.toDo
                             : AppStrings.completed,
                         style: Theme.of(
                           context,
-                        ).textTheme.displaySmall!.copyWith(fontSize: 14),
+                        ).textTheme.titleSmall!.copyWith(fontSize: 14),
                       ),
                     ),
                   ],

@@ -14,7 +14,7 @@ ThemeData DarkTheme() {
       centerTitle: true,
     ),
 
-    // text Theme
+    // *text theme
     textTheme: TextTheme(
       displayLarge: GoogleFonts.lato(
         fontSize: 32.sp,
@@ -31,9 +31,19 @@ ThemeData DarkTheme() {
         color: AppColors.white,
         fontWeight: FontWeight.w400,
       ),
+      titleMedium: GoogleFonts.lato(
+        fontSize: 24.sp,
+        color: AppColors.white,
+        fontWeight: FontWeight.w700,
+      ),
+      titleSmall: GoogleFonts.lato(
+        fontSize: 16.sp,
+        color: AppColors.white,
+        fontWeight: FontWeight.w400,
+      ),
     ),
 
-    // elevated Button theme
+    //* elevated Button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -56,10 +66,11 @@ ThemeData DarkTheme() {
       filled: true,
       fillColor: AppColors.lightBlack,
     ),
+    iconTheme: IconThemeData(color: AppColors.white),
   );
 }
 
-ThemeData getAppTheme() {
+ThemeData lightTheme() {
   return ThemeData(
     primaryColor: AppColors.primary,
     //scaffoldBackgroundColor
@@ -69,23 +80,44 @@ ThemeData getAppTheme() {
       backgroundColor: AppColors.white,
       centerTitle: true,
     ),
-    //text theme
+
+    // text Theme
+    // *text theme
     textTheme: TextTheme(
       displayLarge: GoogleFonts.lato(
+        fontSize: 32.sp,
         color: AppColors.background,
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
+        fontWeight: FontWeight.w700,
       ),
       displayMedium: GoogleFonts.lato(
-        color: AppColors.background,
-        fontSize: 16,
+        fontSize: 24.sp,
+        color: AppColors.white,
+        fontWeight: FontWeight.w700,
       ),
       displaySmall: GoogleFonts.lato(
-        // ignore: deprecated_member_use
-        color: AppColors.background.withOpacity(0.44),
-        fontSize: 16,
+        fontSize: 16.sp,
+        color: AppColors.background,
+        fontWeight: FontWeight.w400,
+      ),
+      titleLarge: GoogleFonts.lato(
+        fontSize: 32.sp,
+        color: AppColors.background,
+        fontWeight: FontWeight.w700,
+      ),
+      titleMedium: GoogleFonts.lato(
+        fontSize: 24.sp,
+        color: AppColors.background,
+        fontWeight: FontWeight.w700,
+      ),
+      titleSmall: GoogleFonts.lato(
+        fontSize: 16.sp,
+        color: AppColors.white,
+        fontWeight: FontWeight.w400,
       ),
     ),
+
+    // *text theme
+    // *inputDecorationTheme
     inputDecorationTheme: InputDecorationTheme(
       // enabledBorder
       enabledBorder: OutlineInputBorder(
@@ -97,9 +129,9 @@ ThemeData getAppTheme() {
         borderSide: BorderSide(color: AppColors.lightBlack),
         borderRadius: BorderRadius.circular(8.r),
       ), // hint
-      // hintStyle: TextStyle(color: AppColors.white),
       filled: true,
       // fillColor: AppColors.deepGrey,
+      fillColor: AppColors.white,
     ),
     //button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -108,5 +140,7 @@ ThemeData getAppTheme() {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
     ),
+    // *inputDecorationTheme
+    iconTheme: IconThemeData(color: AppColors.white),
   );
 }

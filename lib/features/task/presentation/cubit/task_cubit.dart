@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:up_to_do/core/database/cache/cache_helper.dart';
 import 'package:up_to_do/core/database/sqflite/sqflite.dart';
 import 'package:up_to_do/core/services/services_locator.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
+import 'package:up_to_do/core/utils/app_strings.dart';
 import 'package:up_to_do/features/task/data/model/taskModel.dart';
 part 'task_state.dart';
 
@@ -171,6 +173,22 @@ class TaskCubit extends Cubit<TaskState> {
     emit(GetSelectDareTaskSucessState());
     getTasks();
   }
+  //! theme state
+
+  bool isDark = false;
+  void ChangeTheme() {
+    isDark = !isDark;
+    sl<CacheHelper>().saveData(key: "isDark", value: isDark);
+    print(isDark);
+    emit(ChangeThemeState());
+  }
+
+  void GetTheme() {
+    sl<CacheHelper>().getData(key: "isDark");
+    emit(GetThemeState());
+  }
+
+
 
   //? end Cubit
 }

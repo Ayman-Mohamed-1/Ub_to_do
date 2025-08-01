@@ -22,7 +22,7 @@ class NoTaskCoponent extends StatelessWidget {
             AppStrings.noTaskTitle,
             style: Theme.of(
               context,
-            ).textTheme.displayMedium!.copyWith(fontSize: 20),
+            ).textTheme.titleMedium!.copyWith(fontSize: 20),
           ),
           Gap(10.h),
           Text(

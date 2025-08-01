@@ -92,7 +92,9 @@ class AddTask extends StatelessWidget {
                         },
                         icon: Icon(
                           Icons.calendar_month_rounded,
-                          color: AppColors.white,
+                          color: BlocProvider.of<TaskCubit>(context).isDark
+                              ? AppColors.background
+                              : AppColors.white,
                         ),
                       ),
                     ),
@@ -114,7 +116,10 @@ class AddTask extends StatelessWidget {
                               },
                               icon: Icon(
                                 Icons.timer_outlined,
-                                color: AppColors.white,
+                                color:
+                                    BlocProvider.of<TaskCubit>(context).isDark
+                                    ? AppColors.background
+                                    : AppColors.white,
                               ),
                             ),
                           ),
@@ -137,7 +142,10 @@ class AddTask extends StatelessWidget {
                               },
                               icon: Icon(
                                 Icons.timer_outlined,
-                                color: AppColors.white,
+                                color:
+                                    BlocProvider.of<TaskCubit>(context).isDark
+                                    ? AppColors.background
+                                    : AppColors.white,
                               ),
                             ),
                           ),

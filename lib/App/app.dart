@@ -20,10 +20,12 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: DarkTheme(),
-              themeMode: ThemeMode.dark,
+              theme: lightTheme(),
+              darkTheme: DarkTheme(),
+              themeMode: BlocProvider.of<TaskCubit>(context).isDark
+                  ? ThemeMode.light
+                  : ThemeMode.dark,
               // فى مشكله فى  dark mode
-              // darkTheme: getAppTheme(),
               title: "To-Do app",
               home: BlocProvider(create: (_) => TaskCubit(), child: child),
             );

@@ -32,14 +32,30 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    DateFormat.yMMMMd().format(DateTime.now()),
-                    style: Theme.of(context).textTheme.displayMedium,
+                  Row(
+                    children: [
+                      Text(
+                        DateFormat.yMMMMd().format(DateTime.now()),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          BlocProvider.of<TaskCubit>(context).ChangeTheme();
+                        },
+                        icon: Icon(
+                          Icons.mode_night,
+                          color: BlocProvider.of<TaskCubit>(context).isDark
+                              ? AppColors.background
+                              : AppColors.white,
+                        ),
+                      ),
+                    ],
                   ),
                   Gap(12.h),
                   Text(
                     AppStrings.today,
-                    style: Theme.of(context).textTheme.displayMedium,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Gap(12.h),
                   DatePicker(

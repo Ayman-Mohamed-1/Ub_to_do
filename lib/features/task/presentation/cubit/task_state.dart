@@ -69,4 +69,10 @@ final class GetSelectDateLoadingState extends TaskState {}
 
 final class GetSelectDareTaskSucessState extends TaskState {}
 
-//*get Select Date
+//* get Select Date
+//! theme state
+final class ChangeThemeState extends TaskState {}
+
+final class GetThemeState extends TaskState {}
+
+//* theme state
