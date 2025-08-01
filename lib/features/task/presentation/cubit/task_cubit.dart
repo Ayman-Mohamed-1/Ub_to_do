@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:up_to_do/core/database/sqflite/sqflite.dart';
+import 'package:up_to_do/core/services/services_locator.dart';
 import 'package:up_to_do/core/utils/app_colors.dart';
 import 'package:up_to_do/features/task/data/model/taskModel.dart';
 part 'task_state.dart';
@@ -12,6 +14,7 @@ class TaskCubit extends Cubit<TaskState> {
   TextEditingController titleController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   DateTime currentData = DateTime.now();
+  DateTime selctedDate = DateTime.now();
   String startTime = DateFormat("hh:mm a").format(DateTime.now());
   String endTime = DateFormat(
     "hh:mm a",
@@ -92,27 +95,81 @@ class TaskCubit extends Cubit<TaskState> {
 
   //*  ChangeCheckMarkIndex time
   List<TaskModel> tasksList = [];
-  void insertData() {
+  void insertData() async {
     emit(InsertTaskLoadingState());
     try {
-      tasksList.add(
+      await sl<SqfliteHelper>().insert(
         TaskModel(
-          id: 1,
+          date: DateFormat.yMd().format(currentData),
           title: titleController.text,
           task: noteController.text,
           endTime: endTime,
           startTime: startTime,
+          isComplete: false,
           color: currentIndex,
-          isComplete: true,
         ),
       );
       noteController.clear();
       titleController.clear();
       print(tasksList);
       emit(InsertTaskSucessState());
+      getTasks();
     } catch (e) {
       emit(InsertTaskErrorState());
     }
+  }
+
+  void getTasks() async {
+    emit(GetTaskLoadingState());
+    await sl<SqfliteHelper>()
+        .getFromDB()
+        .then((value) {
+          tasksList = value
+              .map((e) => TaskModel.fromMap(e))
+              .toList()
+              .where((e) => e.date == DateFormat.yMd().format(selctedDate))
+              .toList();
+          emit(GetTaskSucessState());
+        })
+        .catchError((e) {
+          print(e.toString());
+          emit(GetTaskErrorState());
+        });
+  }
+
+  void deleteTask(id) async {
+    emit(DeleteTaskLoadingState());
+    await sl<SqfliteHelper>()
+        .deleteDb(id)
+        .then((value) {
+          emit(DeleteTaskSucessState());
+          getTasks();
+        })
+        .catchError((e) {
+          print(e.toString());
+          emit(DeleteTaskErrorState());
+        });
+  }
+
+  void updataTask(id) async {
+    emit(UpdataTaskLoadingState());
+    await sl<SqfliteHelper>()
+        .updateDb(id)
+        .then((value) {
+          emit(UpdateTaskSucessState());
+          getTasks();
+        })
+        .catchError((e) {
+          print(e.toString());
+          emit(UpdateTaskErrorState());
+        });
+  }
+
+  void getSelectDate(date) {
+    emit(GetSelectDateLoadingState());
+    selctedDate = date;
+    emit(GetSelectDareTaskSucessState());
+    getTasks();
   }
 
   //? end Cubit

@@ -17,7 +17,7 @@ class customButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
+        backgroundColor: WidgetStateProperty.all(backgroundColor),
       ),
       child: Text(text, style: TextStyle(color: AppColors.white)),
     );

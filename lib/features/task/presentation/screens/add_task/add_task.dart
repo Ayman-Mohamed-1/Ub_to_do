@@ -24,7 +24,7 @@ class AddTask extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios, color: AppColors.white),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.grey),
         ),
         title: Text(
           AppStrings.addTask,
@@ -76,9 +76,8 @@ class AddTask extends StatelessWidget {
                       validator: (val) {
                         if (val!.isEmpty) {
                           return AppStrings.noteErrorMsg;
-                        } else {
-                          return null;
                         }
+                        return null;
                       },
                     ),
                     AddTaskComponents(

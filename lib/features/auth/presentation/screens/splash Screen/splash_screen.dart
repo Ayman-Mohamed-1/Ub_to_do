@@ -20,7 +20,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     navegat();
     super.initState();
   }
@@ -29,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isVisted =
         await sl<CacheHelper>().getData(key: AppStrings.onBoardingKey) ?? false;
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (_) => isVisted ? HomeScreen() : OnBoardingScreens(),

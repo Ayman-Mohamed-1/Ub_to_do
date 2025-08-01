@@ -32,11 +32,41 @@ final class EndTimeErrorState extends TaskState {}
 final class ChangeCheckMarkIndexState extends TaskState {}
 
 //*  ChangeCheckMarkIndex time
-//! Start time
+//! Inser data
 final class InsertTaskLoadingState extends TaskState {}
 
 final class InsertTaskSucessState extends TaskState {}
 
 final class InsertTaskErrorState extends TaskState {}
 
-//* Start time
+//* Inser data
+//! get data
+final class GetTaskLoadingState extends TaskState {}
+
+final class GetTaskSucessState extends TaskState {}
+
+final class GetTaskErrorState extends TaskState {}
+
+//* get data
+//! updae data
+final class UpdataTaskLoadingState extends TaskState {}
+
+final class UpdateTaskSucessState extends TaskState {}
+
+final class UpdateTaskErrorState extends TaskState {}
+
+//* get data
+//! get data
+final class DeleteTaskLoadingState extends TaskState {}
+
+final class DeleteTaskSucessState extends TaskState {}
+
+final class DeleteTaskErrorState extends TaskState {}
+
+//* get data
+//!get Select Date
+final class GetSelectDateLoadingState extends TaskState {}
+
+final class GetSelectDareTaskSucessState extends TaskState {}
+
+//*get Select Date

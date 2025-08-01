@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:up_to_do/core/utils/app_colors.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
@@ -17,11 +16,12 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: GoogleFonts.lato(
-          textStyle: TextStyle(
-            fontSize: 16,
-            color: AppColors.white.withOpacity(.44),
-            fontWeight: FontWeight.w400,
-          ),
+          textStyle: Theme.of(context).textTheme.displaySmall,
+          // TextStyle(
+          //   fontSize: 16,
+          //   color: AppColors.white.withOpacity(.44),
+          //   fontWeight: FontWeight.w400,
+          // ),
         ),
       ),
     );

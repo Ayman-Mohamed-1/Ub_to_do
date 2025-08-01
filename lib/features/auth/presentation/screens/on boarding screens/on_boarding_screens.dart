@@ -77,9 +77,7 @@ class OoBboardinSscreensState extends State<OnBoardingScreens> {
                   Text(
                     textAlign: TextAlign.center,
                     OnBoardingModel.onBoardingScreens[index].subTitle,
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      color: AppColors.white.withOpacity(.8),
-                    ),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                   Spacer(),
                   Row(

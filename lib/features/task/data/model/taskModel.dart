@@ -1,9 +1,5 @@
-import 'dart:ui';
-
-import 'package:up_to_do/core/utils/app_colors.dart';
-
 class TaskModel {
-  final int id;
+  final int? id;
   final String title;
   final String startTime;
   final String endTime;
@@ -13,39 +9,26 @@ class TaskModel {
   final bool isComplete;
 
   TaskModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.startTime,
     required this.endTime,
     required this.task,
     required this.color,
     required this.isComplete,
-    this.date,
+    required this.date,
   });
 
-  // لتحويل من Map (مثلاً من Firebase أو SQLite)
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
-      id: map['id'] ?? 0,
-      title: map['title'] ?? '',
-      startTime: map['startTime'] ?? '',
-      endTime: map['endTime'] ?? '',
-      task: map['task'] ?? '',
-      isComplete: map['isComplete'] ?? false,
-      color: map['color'] ?? 1,
+      id: map['id'],
+      date: map['date'],
+      title: map['title'],
+      task: map['task'],
+      startTime: map['startTime'],
+      endTime: map['endTime'],
+      isComplete: map['isComplete'] == 1, // هنا التحويل مهم جدًا
+      color: map['color'],
     );
-  }
-
-  // لتحويل لـ Map (للتخزين أو الإرسال)
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'startTime': startTime,
-      'endTime': endTime,
-      'task': task,
-      'isComplete': isComplete,
-      'color': color,
-    };
   }
 }

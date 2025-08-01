@@ -59,38 +59,54 @@ ThemeData DarkTheme() {
   );
 }
 
-// ThemeData getAppTheme() {
-//   return ThemeData(
-//     primaryColor: AppColors.primary,
-//     //scaffoldBackgroundColor
-//     scaffoldBackgroundColor: AppColors.white,
-//     //appBar theme
-//     appBarTheme: const AppBarTheme(
-//       backgroundColor: AppColors.white,
-//       centerTitle: true,
-//     ),
-//     //text theme
-//     textTheme: TextTheme(
-//       displayLarge: GoogleFonts.lato(
-//         color: AppColors.background,
-//         fontWeight: FontWeight.bold,
-//         fontSize: 32,
-//       ),
-//       displayMedium: GoogleFonts.lato(
-//         color: AppColors.background,
-//         fontSize: 16,
-//       ),
-//       displaySmall: GoogleFonts.lato(
-//         color: AppColors.background.withOpacity(0.44),
-//         fontSize: 16,
-//       ),
-//     ),
-//     //button theme
-//     elevatedButtonTheme: ElevatedButtonThemeData(
-//       style: ElevatedButton.styleFrom(
-//         backgroundColor: AppColors.primary,
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-//       ),
-//     ),
-//   );
-// }
+ThemeData getAppTheme() {
+  return ThemeData(
+    primaryColor: AppColors.primary,
+    //scaffoldBackgroundColor
+    scaffoldBackgroundColor: AppColors.white,
+    //appBar theme
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.white,
+      centerTitle: true,
+    ),
+    //text theme
+    textTheme: TextTheme(
+      displayLarge: GoogleFonts.lato(
+        color: AppColors.background,
+        fontWeight: FontWeight.bold,
+        fontSize: 32,
+      ),
+      displayMedium: GoogleFonts.lato(
+        color: AppColors.background,
+        fontSize: 16,
+      ),
+      displaySmall: GoogleFonts.lato(
+        // ignore: deprecated_member_use
+        color: AppColors.background.withOpacity(0.44),
+        fontSize: 16,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      // enabledBorder
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.lightBlack),
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      // focusedBorder
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.lightBlack),
+        borderRadius: BorderRadius.circular(8.r),
+      ), // hint
+      // hintStyle: TextStyle(color: AppColors.white),
+      filled: true,
+      // fillColor: AppColors.deepGrey,
+    ),
+    //button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      ),
+    ),
+  );
+}
